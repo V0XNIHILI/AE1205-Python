@@ -27,3 +27,7 @@ Since Python does not require you to explicitly define the type of the variable 
 ### HacBookPro
 
 Currently I am working on trying to make the HP Zbook Studio G5 laptops, the ones we could get with discount via the university, Mac OSX compatible. At the moment of writing, I have a working version with the only defects being that I can't see the battery status and that there is some form of color banding. If you would like to help figure out a way to fix these final issues, I would really appreciate it!
+
+## SaveTimeTable
+
+If you want to skip some classes and would like to optimize your schedule since you now have lots of gaps in your timetable, check out [SaveTimeTable](https://douwe.xyz/savetimetable/)!

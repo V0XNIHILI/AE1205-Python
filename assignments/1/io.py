@@ -7,7 +7,7 @@ import isa
 print("================================")
 print("| Douwe's Great ISA Calculator |")
 print("================================")
-print("\nLast edited on 27 April 2019")
+print("\n  Last edited on 27 April 2019")
 print("\n--------------------------------")
 
 bValidChoice = None
@@ -18,6 +18,7 @@ bValidChoice = None
 while bValidChoice == None:
     print("\nIn which units do you want to enter your altitude?\n")
     print("1. In [m]\n2. In [ft]\n3. In [FL]")
+
     sInputNo = input("\nEnter your choice: ")
 
     if sInputNo == "1" or sInputNo == "2" or sInputNo == "3":
@@ -48,8 +49,8 @@ while bValidInput == None:
         print("\nYou entered an altitude smaller than 0. Please try again.")
         continue
 
-    if fAltitude >= 100*1000:
-        print("\nYour altitude crossed the Kármán line: you are in outer space. Please try again.")
+    if fAltitude >= 84.852*1000:
+        print("\nYour altitude is too large: you are in outer space. Please try again.")
         continue
 
     bValidInput = True

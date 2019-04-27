@@ -1,7 +1,7 @@
 import isa
 
 # ------------------------------------------------------------------------------------------------------
-# ASKING FOR USER INPUT AND HANDLING OUTPUT
+# THIS FILE ASKS FOR USER INPUT AND HANDLES THE OUTPUT
 # ------------------------------------------------------------------------------------------------------
 
 print("================================")
@@ -31,7 +31,6 @@ bValidInput = None
 # Get the input altitude and calculate the temperature
 # If the input is invalid, let the loop run again
 
-fAltitudeString = ""
 fAltitude = 0
 
 while bValidInput == None:
@@ -56,9 +55,9 @@ while bValidInput == None:
     bValidInput = True
 
 # Calculate the resulting ISA values
-isaValues = isa.calculateISAValues(fAltitude)
+arrISAValues = isa.calculateISAValues(fAltitude)
 
 # Print results from input and calculation
-print("\nTemperature: ", round(isaValues[0], 2), " [K]")
-print("Pressure:    ", round(isaValues[1], 2), "[Pa]")
-print("Density:     ", round(isaValues[2], 3), "[kg/m^3]\n")
+print("\nTemperature: ", round(arrISAValues[0], 2), " [K]")
+print("Pressure:    ", round(arrISAValues[1], 2), "[Pa]")
+print("Density:     ", round(arrISAValues[2], 3), "[kg/m^3]\n")

@@ -20,6 +20,8 @@ Since Python does not require you to explicitly define the type of the variable 
 * Booleans (true/false), example: `bIsReady`
 * Arrays ([1],[2]), example `arrNumbers`
 
+***
+
 ## Other projects
 
 ### HacBookPro

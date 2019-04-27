@@ -8,7 +8,7 @@ The link to Brightspace for this course can be found [here](https://brightspace.
 
 ## File/folder structure
 
-The assignments folder contains all of the assignments from class. In every assignment folder, there is one file called `assignment-x.py` where `x` is the assignment number. The other files in there are used in the `assignment-x.py` file.
+The assignments folder contains all of the assignments from class. In every assignment folder, there is one file called `assignment-x.py` where `x` is the assignment number. The other files in there are used in the `assignment-x.py` file. Every folder also has a file called `README.md` where you can see what the output should look like.
 
 ## How I write code
 

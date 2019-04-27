@@ -1,10 +1,10 @@
-## Asignment 1
+## Assignment 1
 
 Expected output:
 
-```bash
+```
 ==============================
-| V0X\'s Great ISA Calculator |
+| V0X's Great ISA Calculator |
 ==============================
 
 Last edited on 27 April 2019

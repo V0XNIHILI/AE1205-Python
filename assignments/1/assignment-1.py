@@ -4,11 +4,11 @@ import isa
 # THIS FILE ASKS FOR USER INPUT AND HANDLES THE OUTPUT
 # ------------------------------------------------------------------------------------------------------
 
-print("================================")
-print("| Douwe's Great ISA Calculator |")
-print("================================")
-print("\n  Last edited on 27 April 2019")
-print("\n--------------------------------")
+print("==============================")
+print("| V0X's Great ISA Calculator |")
+print("==============================")
+print("\nLast edited on 27 April 2019")
+print("\n------------------------------")
 
 bValidChoice = None
 
@@ -16,6 +16,7 @@ bValidChoice = None
 # Check if the input number is possible
 
 while bValidChoice == None:
+    
     print("\nIn which units do you want to enter your altitude?\n")
     print("1. In [m]\n2. In [ft]\n3. In [FL]")
 
@@ -34,8 +35,8 @@ bValidInput = None
 fAltitude = 0
 
 while bValidInput == None:
-    sAltitude = input("\nEnter altitude: ")
 
+    sAltitude = input("\nEnter altitude: ")
     fAltitude = float(sAltitude)
 
     if sInputNo == "2":

@@ -28,7 +28,7 @@ def calculateISAValues (fAlt):
         return fRho0 * math.exp(-9.80665/287.00/fT*(fH1- fH0))
 
     # Taken from 'Hand-out-ISA' on Brightspace from Introduction to Aerospace
-    # Putting it in a table like this save computational time
+    # Putting it in a table like this saves computational time
     fAllLayerProperties =   [   
                                 [288.15,    101325.0,   1.22500,        -0.0065,     0.0],
                                 [216.65,    22632.0,    0.363918,        0.0,        11.0*1000],

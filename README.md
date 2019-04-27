@@ -2,7 +2,7 @@
 
 # AE1205 Programming and Scientific Computing in Python for AE1 (2018/19 Q4)
 
-This GitHub page contains my version of the answers to the in class assignments. If you disagree with my approach/have a better idea, please let me know.
+This GitHub page contains my version of the answers to the in class assignments. If you disagree with my approach/have a better idea, please let me know. PLEASE do not copy these files one on one, as that is fraud. Just use them as a reference and write your own code.
 
 The link to Brightspace for this course can be found [here](https://brightspace.tudelft.nl/d2l/home/133502).
 

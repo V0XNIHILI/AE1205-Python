@@ -1,6 +1,6 @@
 # Assignment 1: Make your own basic ISA calculator
 
-## Photos of the assignment paper (thanks Georgina):
+## Photos of the assignment paper (thanks Georgina)
 
 | ![Page 1](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/1/photos/assignment-1-1.jpeg) | ![Page 2](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/1/photos/assignment-1-2.jpeg) |
 |----:|------:|

@@ -1,4 +1,4 @@
-import isa
+import isa.isa
 
 # ------------------------------------------------------------------------------------------------------
 # THIS FILE ASKS FOR USER INPUT AND HANDLES THE OUTPUT

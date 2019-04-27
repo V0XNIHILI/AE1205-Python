@@ -5,7 +5,7 @@ import math
 # ------------------------------------------------------------------------------------------------------
 
 # Function which returns the asked ISA values
-def calculateISAValues (fAlt):
+def calculateISAValues (fAlt, fBaseTemp = 288.15):
 
     # function to calculate the ISA temperature based on some parameters
     def calcISATemp (fT0, fLapseRate, fH0, fH1):

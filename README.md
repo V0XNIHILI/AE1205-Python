@@ -4,7 +4,7 @@ This GitHub page contains my version of the answers to the in class assignments.
 
 ## File/folder structure
 
-The assignments folder contains all of the assignments from class. In every assignment folder, there is one file called `assignment-x.py` where `x` is the assignment number. The other files in there are used in this `assignment-x.py` file.
+The assignments folder contains all of the assignments from class. In every assignment folder, there is one file called `assignment-x.py` where `x` is the assignment number. The other files in there are used in the `assignment-x.py` file.
 
 ## How I write code
 
@@ -14,3 +14,4 @@ Since Python does not require you to explicitly define the type of the variable 
 * Floats (3.1415...), example `fPi`
 * Strings ("Python"), example `sLoremIpsum`
 * Booleans (true/false), example: `bIsReady`
+* Arrays ([1],[2]), example `arrNumbers`

@@ -24,9 +24,15 @@ In which units do you want to enter your altitude?
 
 Enter your choice: 1
 
-Enter altitude: 500
+Do you want to enter a custom sea level temperature? (Y/N)
 
-Temperature:  284.9  [K]
-Pressure:     95459.79 [Pa]
-Density:      1.167 [kg/m^3]
+Enter your choice: Y
+
+Enter temperature [K]: 295.15
+
+Enter altitude: 5000
+
+Temperature:  262.65  [K]
+Pressure:     54875.24 [Pa]
+Density:      0.728 [kg/m^3]
 ```

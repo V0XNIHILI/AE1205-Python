@@ -25,6 +25,38 @@ while True:
     else:
         print("\nYou did not enter a valid choice. Please try again.")
 
+# Let the user enter a custom starting temperature
+# Check if the input is valid, else the loop run again
+
+fSeaLevelTemp = 288.15
+
+while True:
+
+    print("\nDo you want to enter a custom sea level temperature? (Y/N)")
+
+    sInputNo = input("\nEnter your choice: ")
+
+    if sInputNo == "y" or sInputNo == "Y" or sInputNo == "n" or sInputNo == "N":
+        while True:
+
+            sSeaLevelTemp = input("\nEnter temperature [K]: ")
+
+            # Check if input is actually a number
+            try:
+                float(sSeaLevelTemp)
+            except:
+                print("\nYou did not enter a number. Please try again.")
+                continue
+
+            # Convert string to float
+            fSeaLevelTemp = float(sSeaLevelTemp)
+
+            break
+        
+        break
+    else:
+        print("\nYou did not enter a valid choice. Please try again.")
+
 # Get the input altitude and calculate the temperature
 # If the input is invalid, let the loop run again
 
@@ -66,7 +98,7 @@ while True:
 # Calculate the resulting ISA values
 # These values will be stored in an array
 
-arrISAValues = isa.calculateISAValues(fAltitude)
+arrISAValues = isa.calculateISAValues(fAltitude, fSeaLevelTemp)
 
 # Print results from input and calculation
 # Round them to some decimals

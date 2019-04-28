@@ -36,9 +36,9 @@ def calculateISAValues (fAlt, fBaseTemp = 288.15):
                             [71*1000,  -0.002],
                         ]
 
-    fT0     = 288.15
+    fT0     = fBaseTemp
     fP0     = 101325
-    fRho0   = 1.225
+    fRho0   = fP0/287.00/fT0
     fH0     = 0
 
     fTemperature    = 0

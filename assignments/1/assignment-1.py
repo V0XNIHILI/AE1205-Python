@@ -13,6 +13,8 @@ print("\n------------------------------")
 # Ask for the input units
 # Check if the input number is possible
 
+sAltitudeType = ""
+
 while True:
 
     print("\nIn which units do you want to enter your altitude?\n")
@@ -21,6 +23,7 @@ while True:
     sInputNo = input("\nEnter your choice: ")
 
     if sInputNo == "1" or sInputNo == "2" or sInputNo == "3":
+        sAltitudeType = sInputNo
         break
     else:
         print("\nYou did not enter a valid choice. Please try again.")
@@ -38,6 +41,9 @@ while True:
 
     if sInputNo == "y" or sInputNo == "Y" or sInputNo == "n" or sInputNo == "N":
         while True:
+
+            if sInputNo == "n" or sInputNo == "N":
+                break
 
             sSeaLevelTemp = input("\nEnter temperature [K]: ")
 
@@ -77,10 +83,10 @@ while True:
     fAltitude = float(sAltitude)
 
     # Run conversion to metric units if required
-    if sInputNo == "2":
+    if sAltitudeType == "2":
         fAltitude = fAltitude*0.3048
 
-    if sInputNo == "3":
+    if sAltitudeType == "3":
         fAltitude = fAltitude*30.48
 
     # Run checks on the input

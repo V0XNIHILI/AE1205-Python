@@ -45,40 +45,39 @@ if os.path.isfile("animals.vox"):
                 iAmountOfSteps += 1
 
                 sSplitLine = linQuestions[counter].split(" -> ")
+                sQuestion = sSplitLine[0]
                 sNextOptions = sSplitLine[1]
 
-                sQuestion = sSplitLine[0]
-                sAnswer = Input.Ask(sQuestion, ["y", "n"])
-                bAnswer = Input.IsTrue(sAnswer)
+                bAnswer = Input.IsTrue(Input.Ask(sQuestion, ["y", "n"]))
 
                 iParameterToCheck = 0
 
                 if bAnswer == False:
                     iParameterToCheck = 1
 
-                if str.isdigit(sNextOptions.split(" / ")[iParameterToCheck].strip()) == True:
-                    counter = int(sNextOptions.split(" / ")[iParameterToCheck].strip())
+                sNextOption = sNextOptions.split(" / ")[iParameterToCheck].strip()
+
+                if sNextOption.isdigit() == True:
+                    counter = int(sNextOption)
                     continue
 
-                sAnimalName = sNextOptions.split(" / ")[iParameterToCheck].strip()
-
-                sGuessCorrect = Input.Ask("\n> I think I found your animal! Is it a(n) " + sAnimalName + "?", ["y", "n"])
-                bGuessCorrect = Input.IsTrue(sGuessCorrect)
+                bGuessCorrect = Input.IsTrue(Input.Ask("\n> I think I found your animal! Is it a(n) " + sNextOption + "?", ["y", "n"]))
 
                 if bGuessCorrect == True:
-                    print("> So I found your animal! It turned out to be a(n) " + sAnimalName)
+                    print("> So I found your animal in " + str(iAmountOfSteps) + " steps! It turned out to be a(n) " + sNextOption)
                     break
 
                 else:
 
                     iNewQuestionNumber = len(linQuestions)
-                    linQuestions[counter] = linQuestions[counter].replace(sAnimalName, str(iNewQuestionNumber))
+
+                    # Update the question which wasn't good enough
+                    linQuestions[counter] = linQuestions[counter].replace(sNextOption, str(iNewQuestionNumber))
 
                     sNewName = Input.Ask("\n> Enter the name of your new animal:")
                     sQuestionToDifferentiate = Input.Ask("> Enter a question to differentiate between the wrong and correct animal:")
                     
-                    sAnswerToQuestionForCorrectAnimal = Input.Ask("> What is the answer to this question for the correct animal? (y/n)", ["y", "n"])
-                    bAnswerToQuestionForCorrectAnimal = Input.IsTrue(sAnswerToQuestionForCorrectAnimal)
+                    bAnswerToQuestionForCorrectAnimal = Input.IsTrue(Input.Ask("> What is the answer to this question for the correct animal? (y/n)", ["y", "n"]))
 
                     sNewQuestion = sQuestionToDifferentiate + " -> "
 
@@ -88,6 +87,7 @@ if os.path.isfile("animals.vox"):
                     else:
                         sNewQuestion += sAnimalName + " / " + sNewName
 
+                    # Add the new quesion to the list
                     linQuestions.append("\n" + sNewQuestion)
 
                     # Update animal question file
@@ -97,6 +97,7 @@ if os.path.isfile("animals.vox"):
 
                     break
 
+        # Ask if the user wants to try again
         sTryAgain = Input.Ask("\n> Do you want to try again?", ["y", "n"])   
 
         if Input.IsTrue(sTryAgain) == False:

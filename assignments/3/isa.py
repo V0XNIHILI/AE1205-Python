@@ -1,3 +1,5 @@
+# 1 one 1 copy of the isa.py file in assignments/1 bc else importing is difficult
+
 import math
 
 # ------------------------------------------------------------------------------------------------------

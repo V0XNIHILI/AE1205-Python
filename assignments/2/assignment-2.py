@@ -22,8 +22,6 @@ print("> Think of an animal. I will try to guess it.")
 # Guessing
 # ------------------------------------------------------
 
-iAmountOfSteps = 0
-
 # Open the questions file if it exists, else create a new file
 if os.path.isfile("animals.vox"):
 
@@ -39,6 +37,7 @@ if os.path.isfile("animals.vox"):
             print("")
 
             counter = 0
+            iAmountOfSteps = 0
 
             while True:
 
@@ -82,10 +81,10 @@ if os.path.isfile("animals.vox"):
                     sNewQuestion = sQuestionToDifferentiate + " -> "
 
                     if bAnswerToQuestionForCorrectAnimal == True:
-                        sNewQuestion += sNewName + " / " + sAnimalName
+                        sNewQuestion += sNewName + " / " + sNextOption
 
                     else:
-                        sNewQuestion += sAnimalName + " / " + sNewName
+                        sNewQuestion += sNextOption + " / " + sNewName
 
                     # Add the new quesion to the list
                     linQuestions.append("\n" + sNewQuestion)

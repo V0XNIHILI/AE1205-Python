@@ -1,13 +1,6 @@
-# 1 one 1 copy of the isa.py file in assignments/1 bc else importing is difficult
-
 import math
 
-# ------------------------------------------------------------------------------------------------------
-# ALL FUNCTIONS REQUIRED TO CALCULATE ISA VALUES
-# ------------------------------------------------------------------------------------------------------
-
-# Function which returns the asked ISA values
-def calculateISAValues (fAlt, fBaseTemp = 288.15):
+def calculate (fAlt, fBaseTemp = 288.15):
 
     # function to calculate the ISA temperature based on some parameters
     def calcISATemp (fT0, fLapseRate, fH0, fH1):

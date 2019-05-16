@@ -1,6 +1,10 @@
 import isa
 import math
 
+from planet import Planet
+from spacecraft import Spacecraft
+from vector2d import Vector2D
+
 class ReEntry:
     def __init__ (self, spacecraft, planet, initialAltitude, initialVelocity, initialFlightPath):
         self.objSpacecraft = spacecraft
@@ -12,52 +16,35 @@ class ReEntry:
     def simulate(self, timeInterval):
         fCurrentAltitude = self.fInitialAltitude
         fCurrentFlightPath = self.fInitialFlightPath
-        fCurrentVelocity = Vector2D(self.fInitialVelocity * math.cos(math.radians(fCurrentFlightPath)), self.fInitialVelocity * math.sin(math.radians(fCurrentFlightPath)))
+        currentVelocity2D = Vector2D(self.fInitialVelocity * math.cos(math.radians(fCurrentFlightPath)), self.fInitialVelocity * math.sin(math.radians(fCurrentFlightPath)))
+        
+        arrDataPoints = []
 
         fCurrentTravelTime = 0
 
-        while fCurrentAltitude > 1:
-            fcurrentDensity = isa.calculate(fCurrentAltitude)[2] # Density is the second column of the return contents of the ISA
+        while fCurrentAltitude > 15*1000:
+            fCurrentDensity = isa.calculate(fCurrentAltitude)[2] # Density is the second column of the return contents of the ISA
 
-            # if 95.687
-            
-            fGravitationalForce = self.GetGravitationalForce(fCurrentAltitude)
-            fDragForce = self.GetDragForce(fCurrentVelocity, fcurrentDensity)
+            fGravitationalForce = self.getgravitationalforce(fCurrentAltitude)
+            fDragForce = self.getdragforce(currentVelocity2D.length(), fCurrentDensity)
 
-            fResultantX = fDragForce * math.cos(math.radians(fCurrentFlightPath)) # To the right is positive
+            fResultantX = -fDragForce * math.cos(math.radians(fCurrentFlightPath)) # -fDragForce #* math.cos(math.radians(fCurrentFlightPath)) # To the right is positive
             fResultantY = fGravitationalForce - fDragForce * math.sin(math.radians(fCurrentFlightPath)) # Downwards is positive
 
-            arrCurrentAcceleration = Vector2D(fResultantX / self.objSpacecraft.mass, fResultantY / self.objSpacecraft.mass)
-            arrCurrentVelocity = Vector2D(arrCurrentVelocity.x + arrCurrentAcceleration.x * timeInterval, arrCurrentVelocity.y + arrCurrentAcceleration.y * timeInterval)
-
-            fCurrentAltitude -= arrCurrentVelocity.y * timeInterval    # -= because re-entry means the spacecraft is going down
-            fCurrentFlightPath = math.degrees(math.tanh(arrCurrentVelocity.y / arrCurrentVelocity.x))
+            currentAcceleration2D = Vector2D(fResultantX / self.objSpacecraft.mass, fResultantY / self.objSpacecraft.mass)
+            currentVelocity2D = Vector2D(currentVelocity2D.x + currentAcceleration2D.x * timeInterval, currentVelocity2D.y + currentAcceleration2D.y * timeInterval)
+            
+            fCurrentAltitude -= currentVelocity2D.y * timeInterval    # -= because re-entry means the spacecraft is going down
+            fCurrentFlightPath = math.degrees(math.tanh(currentVelocity2D.y / currentVelocity2D.x))
 
             fCurrentTravelTime += timeInterval
 
-            print(str(fCurrentTravelTime) + "/" + str(fCurrentVelocity))
+            arrDataPoints.append([fCurrentTravelTime, currentAcceleration2D, currentVelocity2D, fCurrentAltitude, fCurrentFlightPath, fCurrentDensity])
+
+        return arrDataPoints
 
     def getgravitationalforce (self, altitude):
         return (6.6741 * math.pow(10, -11)) * self.objPlanet.mass * self.objSpacecraft.mass / math.pow((self.objPlanet.radius + altitude), 2)
 
     def getdragforce (self, velocity, density):
         return 0.5 * self.objSpacecraft.dragCoefficient * density * math.pow(velocity, 2) * self.objSpacecraft.frontalArea
-
-class Vector2D:
-    def __init__ (self, x, y):
-        self.x = x
-        self.y = y
-
-    def length(self):
-        return math.sqrt(math.pow(x, 2) + math.pow(y, 2))
-
-class Spacecraft:
-    def __init__ (self, mass, frontalArea, dragCoefficient):
-        self.mass = mass
-        self.frontalArea = frontalArea
-        self.dragCoefficient = dragCoefficient
-
-class Planet:
-    def __init__ (self, mass, radius):
-        self.mass = mass
-        self.radius = radius

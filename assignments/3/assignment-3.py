@@ -56,30 +56,67 @@ travelledPath = PathTravelled(arrDatapointsFromSimulation)
 # Write required output to console
 # ------------------------------------------------------
 
-velocity2DAt32Km = travelledPath.getvelocityataltitude(32*1000)
-velocity2DAt11Km = travelledPath.getvelocityataltitude(11*1000)
-velocity2DAt0Km = travelledPath.getvelocityataltitude(0)
+dataPointAt32Km = travelledPath.getdatapointataltitude(32*1000)
+dataPointAt11Km = travelledPath.getdatapointataltitude(11*1000)
+dataPointAt0Km = travelledPath.getdatapointataltitude(0)
 
-print("> Velocity at 32,000 [m]:\n\n" + "x:       " + str(round(velocity2DAt32Km.x, 1)) + " [m/s]\ny:       " + str(round(velocity2DAt32Km.y, 1)) + " [m/s]\nTotal:   " + str(round(velocity2DAt32Km.length(), 1))  + " [m/s]\n")
-print("> Velocity at 11,000 [m]:\n\n" + "x:       " + str(round(velocity2DAt11Km.x, 1)) + " [m/s]\ny:       " + str(round(velocity2DAt11Km.y, 1)) + " [m/s]\nTotal:   " + str(round(velocity2DAt11Km.length(), 1))  + " [m/s]\n")
-print("> Velocity at 0 [m]:\n\n"      + "x:       " + str(round(velocity2DAt0Km.x, 1))  + " [m/s]\ny:       " + str(round(velocity2DAt0Km.y, 1))  + " [m/s]\nTotal:   " + str(round(velocity2DAt0Km.length(), 1))   + " [m/s]\n")
+print("> At 32,000 [m]:\n\n" + "V_x:   " + str(round(dataPointAt32Km[2].x, 1)) + " [m/s]\nV_y:   " + str(round(dataPointAt32Km[2].y, 1)) + " [m/s]\nV_t:   " + str(round(dataPointAt32Km[2].length(), 1))  + " [m/s]\ny_p:   " + str(round(dataPointAt32Km[5], 2)) + " [deg]\n")
+print("> At 11,000 [m]:\n\n" + "V_x:   " + str(round(dataPointAt11Km[2].x, 1)) + " [m/s]\nV_y:   " + str(round(dataPointAt11Km[2].y, 1)) + " [m/s]\nV_t:   " + str(round(dataPointAt11Km[2].length(), 1))  + " [m/s]\ny_p:   " + str(round(dataPointAt11Km[5], 2)) + " [deg]\n")
+print("> At 0 [m]:\n\n"      + "V_x:   " + str(round(dataPointAt0Km[2].x, 1))  + " [m/s]\nV_y:   " + str(round(dataPointAt0Km[2].y, 1))  + " [m/s]\nV_t:   " + str(round(dataPointAt0Km[2].length(), 1))   + " [m/s]\ny_p:   " + str(round(dataPointAt0Km[5], 2)) + " [deg]\n")
 
 # ------------------------------------------------------
 # Display plot of results
 # ------------------------------------------------------
 
-arrX = []
-arrY = []
-
-for dataPoint in arrDatapointsFromSimulation:
-    arrX.append(dataPoint[3])
-    arrY.append(dataPoint[2].length())
-
-plotter.plot(arrX, arrY)
-plotter.show()
-
+# Get arrays with values for plots
+arrAltitudeInKFt = travelledPath.getaltitudesinkft()
+arrSpeedInKFt = travelledPath.getspeedsinkft()
+arrGForces = travelledPath.getgforces()
+arrTimeInSec = travelledPath.gettimesinsec()
+arrTimeInMinutes = travelledPath.gettimesinminutes()
+arrHorizontalDistanceTravelled = travelledPath.gethorizontaldistancesfromimpactpointinkm()
 
 # x: alt in kft, y: speed in kft/s
-# time on x in sec, g force of y-accel on y axis
-# range (hor distance from impact point ) on x-axis, altitude in kft on y-axis
-# time in minutes on x-axis, altitude in kft on y-axis
+plotter.subplot(2, 2, 1)
+plotter.ylim(0, 25)
+plotter.xlim(fInitialAltitude/1000/0.3048, 0)
+plotter.plot(arrAltitudeInKFt, arrSpeedInKFt)
+plotter.grid()
+plotter.margins(x=0)
+plotter.title("Speed versus altitude of re-entry")
+plotter.xlabel("Altitude [kft]")
+plotter.ylabel("Speed [kft/s]")
+
+# x: time in sec, y: g forces
+plotter.subplot(2, 2, 2)
+plotter.plot(arrTimeInSec, arrGForces)
+plotter.grid()
+plotter.margins(x=0)
+plotter.title("G-force versus time during re-entry")
+plotter.xlabel("Time [s]")
+plotter.ylabel("G-force [-]")
+
+# x: horizontal distance from impact point in kft, y: alt in kft
+plotter.subplot(2, 2, 3)
+plotter.ylim(0, 400)
+plotter.gca().invert_xaxis()
+plotter.plot(arrHorizontalDistanceTravelled, arrAltitudeInKFt)
+plotter.grid()
+plotter.margins(x=0)
+plotter.title("Altitude versus range of re-entry")
+plotter.xlabel("Range [km]")
+plotter.ylabel("Altitude [kft]")
+
+# x: time in minutes, y: altitude in kft
+plotter.subplot(2, 2, 4)
+plotter.ylim(0, 400)
+plotter.plot(arrTimeInMinutes, arrAltitudeInKFt)
+plotter.grid()
+plotter.margins(x=0)
+plotter.title("Altitude versus time during re-entry")
+plotter.xlabel("Time [min]")
+plotter.ylabel("Altitude [kft]")
+
+# Actually plot the graphs with some margins between the plots (tight_layout())
+plotter.tight_layout()
+plotter.show()

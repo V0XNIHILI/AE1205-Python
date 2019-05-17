@@ -15,6 +15,7 @@ class ReEntry:
 
     def simulate(self, timeInterval):
         fCurrentAltitude = self.fInitialAltitude
+        fHorizontalDistanceTravelled = 0
         fCurrentFlightPath = self.fInitialFlightPath
         currentVelocity2D = Vector2D(self.fInitialVelocity * math.cos(math.radians(fCurrentFlightPath)), self.fInitialVelocity * math.sin(math.radians(fCurrentFlightPath)))
 
@@ -35,11 +36,12 @@ class ReEntry:
             currentVelocity2D = Vector2D(currentVelocity2D.x + currentAcceleration2D.x * timeInterval, currentVelocity2D.y + currentAcceleration2D.y * timeInterval)
 
             fCurrentAltitude += currentVelocity2D.y * timeInterval
+            fHorizontalDistanceTravelled += currentVelocity2D.x * timeInterval
             fCurrentFlightPath = math.degrees(math.atan(currentVelocity2D.y / currentVelocity2D.x))
 
             fCurrentTravelTime += timeInterval
 
-            arrDataPoints.append([fCurrentTravelTime, currentAcceleration2D, currentVelocity2D, fCurrentAltitude, fCurrentFlightPath])
+            arrDataPoints.append([fCurrentTravelTime, currentAcceleration2D, currentVelocity2D, fCurrentAltitude, fHorizontalDistanceTravelled, fCurrentFlightPath])
 
         return arrDataPoints
 
@@ -53,14 +55,64 @@ class PathTravelled:
     def __init__ (self, dataPoints): # Should be in the same format as what ReEntry returns
         self.arrDataPoints = dataPoints
 
-    def getvelocityataltitude (self, altitude):
+    def getdatapointataltitude (self, altitude):
         fSmallestSquaredDistanceToAltitude = math.pow((self.arrDataPoints[0][3] - altitude), 2)
-        velocity2DAtAltitude = Vector2D(0, 0)
+        dataPointAtAltitude = None
 
         for dataPoint in self.arrDataPoints:
             fSquaredAltitudeDistance = math.pow((dataPoint[3] - altitude), 2)
             if fSquaredAltitudeDistance < fSmallestSquaredDistanceToAltitude:
                 fSmallestSquaredDistanceToAltitude = fSquaredAltitudeDistance
-                velocity2DAtAltitude = dataPoint[2]
+                dataPointAtAltitude = dataPoint
 
-        return velocity2DAtAltitude
+        return dataPointAtAltitude
+
+    def getaltitudesinkft (self):
+        arrAltitudesInKFt = []
+
+        for dataPoint in self.arrDataPoints:
+            arrAltitudesInKFt.append(dataPoint[3]/0.3048/1000)
+
+        return arrAltitudesInKFt
+
+    def getspeedsinkft (self):
+        arrSpeedsInKFt = []
+
+        for dataPoint in self.arrDataPoints:
+            arrSpeedsInKFt.append(dataPoint[2].length()/0.3048/1000)
+
+        return arrSpeedsInKFt
+
+    def getgforces (self):
+        arrGForces = []
+
+        for dataPoint in self.arrDataPoints:
+            arrGForces.append(abs(dataPoint[2].y)/9.980665)
+
+        return arrGForces
+
+    def gethorizontaldistancesfromimpactpointinkm (self):
+        arrHorizontalDistancesInKm = []
+
+        fTotalHorizontalDistanceTravelled = self.arrDataPoints[len(self.arrDataPoints)-1][4]/1000
+
+        for dataPoint in self.arrDataPoints:
+            arrHorizontalDistancesInKm.append(fTotalHorizontalDistanceTravelled - dataPoint[4]/1000)
+
+        return arrHorizontalDistancesInKm
+
+    def gettimesinsec (self):
+        arrTimesInSec = []
+
+        for dataPoint in self.arrDataPoints:
+            arrTimesInSec.append(dataPoint[0])
+
+        return arrTimesInSec
+
+    def gettimesinminutes (self):
+        arrTimesInMinutes = []
+
+        for dataPoint in self.arrDataPoints:
+            arrTimesInMinutes.append(dataPoint[0]/60)
+
+        return arrTimesInMinutes

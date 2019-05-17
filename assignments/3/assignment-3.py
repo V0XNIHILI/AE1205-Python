@@ -44,7 +44,7 @@ fFlightPathDeg = -1.5
 currentSpacecraft = Spacecraft(fSpacecraftMassKg, fReferenceArea, fDragCoefficient)
 currentPlanet = Planet(fEarthMass, fEarthRadius)
 
-# Create parachutes for during the re-entry
+# Create parachutes for during the re-entry, both parachute areas where found experimentally
 drogueChute = Parachute(186*0.514444, 225*0.3048, 47, 1.75, 0.694, 0)
 mainChute = Parachute(225*0.3048, 28*0.3048, 5*60+31, 1.75, 154, 10*1000*0.3048)
 

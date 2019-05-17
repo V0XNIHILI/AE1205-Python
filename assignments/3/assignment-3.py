@@ -73,7 +73,7 @@ dataPointAt186kts = travelledPath.getdatapointatspeed(186*0.514444)
 
 print("> At 186 [kts] the altitude is: " + str(round(dataPointAt186kts[3], 1)) + " [m]\n")
 
-print("> The maximum G-force is: " + str(round(travelledPath.getmaxgforce(200), 2)) + " [-]")
+print("> The maximum G-force is: " + str(round(travelledPath.getmaxgforce(200), 2)) + " [-]\n")
 
 # ------------------------------------------------------
 # Display plot of results
@@ -103,6 +103,7 @@ plotter.ylabel("Speed [kft/s]")
 
 # x: time in sec, y: g forces
 plotter.subplot(2, 2, 2)
+plotter.ylim(0, 50)
 plotter.plot(arrTimeInSec, arrGForces)
 plotter.grid()
 plotter.margins(x=0)

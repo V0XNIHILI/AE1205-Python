@@ -113,7 +113,7 @@ class PathTravelled:
         arrGForces = []
 
         for dataPoint in self.arrDataPoints:
-            arrGForces.append(dataPoint[1].y/9.980665)
+            arrGForces.append(dataPoint[1].length()/9.980665)
 
         return arrGForces
 
@@ -159,7 +159,7 @@ class PathTravelled:
             if dataPoint[0] > maxTime:
                 break
             else:
-                fCurrentGForce = dataPoint[1].y/9.80665
+                fCurrentGForce = dataPoint[1].length()/9.80665
 
                 if fCurrentGForce > fMaxGForce:
                     fMaxGForce = fCurrentGForce

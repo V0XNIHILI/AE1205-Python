@@ -51,8 +51,8 @@ class ReEntry:
 
             fCurrentAltitude += currentVelocity2D.y * timeInterval
             fHorizontalDistanceTravelled += currentVelocity2D.x * timeInterval
-            fCurrentFlightPath = math.degrees(math.atan(currentVelocity2D.y / currentVelocity2D.x))
-            
+            fCurrentFlightPath = math.degrees(math.atan2(currentVelocity2D.y, currentVelocity2D.x))
+
             fCurrentTravelTime += timeInterval
 
             arrDataPoints.append([fCurrentTravelTime, currentAcceleration2D, currentVelocity2D, fCurrentAltitude, fHorizontalDistanceTravelled, fCurrentFlightPath])
@@ -150,3 +150,18 @@ class PathTravelled:
             arrFlightPathAngles.append(dataPoint[5] )
 
         return arrFlightPathAngles
+
+    # The maxTime parameter is included to EXCLUDE the ginormous spikes caused by the parachutes
+    def getmaxgforce (self, maxTime):
+        fMaxGForce = 0
+
+        for dataPoint in self.arrDataPoints:
+            if dataPoint[0] > maxTime:
+                break
+            else:
+                fCurrentGForce = dataPoint[1].y/9.80665
+
+                if fCurrentGForce > fMaxGForce:
+                    fMaxGForce = fCurrentGForce
+        
+        return fMaxGForce

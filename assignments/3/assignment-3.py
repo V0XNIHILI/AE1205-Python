@@ -45,8 +45,8 @@ currentSpacecraft = Spacecraft(fSpacecraftMassKg, fReferenceArea, fDragCoefficie
 currentPlanet = Planet(fEarthMass, fEarthRadius)
 
 # Create parachutes for during the re-entry
-drogueChute = Parachute(186*0.514444, 225*0.3048, 47, 1.75, 0.611, 0)
-mainChute = Parachute(225*0.3048, 28*0.3048, 5*60+31, 1.75, 10, 10*1000*0.3048)
+drogueChute = Parachute(186*0.514444, 225*0.3048, 47, 1.75, 0.694, 0)
+mainChute = Parachute(225*0.3048, 28*0.3048, 5*60+31, 1.75, 154, 10*1000*0.3048)
 
 # ------------------------------------------------------
 # Simulate the whole thing
@@ -54,7 +54,7 @@ mainChute = Parachute(225*0.3048, 28*0.3048, 5*60+31, 1.75, 10, 10*1000*0.3048)
 
 # Create, run and save the simulation
 currentSimulation = ReEntry(currentSpacecraft, currentPlanet, fInitialAltitude, fInitialVelocity, fFlightPathDeg, drogueChute, mainChute)
-arrDatapointsFromSimulation = currentSimulation.simulate(0.1, True)
+arrDatapointsFromSimulation = currentSimulation.simulate(0.01, True)
 travelledPath = PathTravelled(arrDatapointsFromSimulation)
 
 # ------------------------------------------------------
@@ -71,7 +71,9 @@ print("> At 0 [m]:\n\n"      + "V_x:   " + str(round(dataPointAt0Km[2].x, 1))  +
 
 dataPointAt186kts = travelledPath.getdatapointatspeed(186*0.514444)
 
-print("> At 186 [kts] the altitude is: " + str(round(dataPointAt186kts[3], 1)) + " [m]")
+print("> At 186 [kts] the altitude is: " + str(round(dataPointAt186kts[3], 1)) + " [m]\n")
+
+print("> The maximum G-force is: " + str(round(travelledPath.getmaxgforce(200), 2)) + " [-]")
 
 # ------------------------------------------------------
 # Display plot of results
@@ -86,8 +88,10 @@ arrTimeInMinutes = travelledPath.gettimesinminutes()
 arrHorizontalDistanceTravelled = travelledPath.gethorizontaldistancesfromimpactpointinkm()
 arrFlightPathAngles = travelledPath.getflightpathangles()
 
+plotter.figure(num="Various re-entry graphs")
+
 # x: alt in kft, y: speed in kft/s
-plotter.subplot(2, 3, 1)
+plotter.subplot(2, 2, 1)
 plotter.ylim(0, 25)
 plotter.xlim(fInitialAltitude/1000/0.3048, 0)
 plotter.plot(arrAltitudeInKFt, arrSpeedInKFt)
@@ -98,7 +102,7 @@ plotter.xlabel("Altitude [kft]")
 plotter.ylabel("Speed [kft/s]")
 
 # x: time in sec, y: g forces
-plotter.subplot(2, 3, 2)
+plotter.subplot(2, 2, 2)
 plotter.plot(arrTimeInSec, arrGForces)
 plotter.grid()
 plotter.margins(x=0)
@@ -107,7 +111,7 @@ plotter.xlabel("Time [s]")
 plotter.ylabel("G-force [-]")
 
 # x: horizontal distance from impact point in kft, y: alt in kft
-plotter.subplot(2, 3, 3)
+plotter.subplot(2, 2, 3)
 plotter.ylim(0, 400)
 plotter.gca().invert_xaxis()
 plotter.plot(arrHorizontalDistanceTravelled, arrAltitudeInKFt)
@@ -118,7 +122,7 @@ plotter.xlabel("Range [km]")
 plotter.ylabel("Altitude [kft]")
 
 # x: time in minutes, y: altitude in kft
-plotter.subplot(2, 3, 4)
+plotter.subplot(2, 2, 4)
 plotter.ylim(0, 400)
 plotter.plot(arrTimeInMinutes, arrAltitudeInKFt)
 plotter.grid()
@@ -127,15 +131,6 @@ plotter.title("Altitude versus time during re-entry")
 plotter.xlabel("Time [min]")
 plotter.ylabel("Altitude [kft]")
 
-# x: time in minutes, y: flight path angle in deg
-plotter.subplot(2, 3, 5)
-plotter.plot(arrTimeInMinutes, arrFlightPathAngles)
-plotter.grid()
-plotter.margins(x=0)
-plotter.title("Flight path angle versus time during re-entry")
-plotter.xlabel("Time [min]")
-plotter.ylabel("Angle [deg]")
-
 # Actually plot the graphs with some margins between the plots (tight_layout())
-#plotter.tight_layout()
+plotter.tight_layout()
 plotter.show()

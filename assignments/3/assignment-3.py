@@ -64,6 +64,10 @@ print("> At 32,000 [m]:\n\n" + "V_x:   " + str(round(dataPointAt32Km[2].x, 1)) +
 print("> At 11,000 [m]:\n\n" + "V_x:   " + str(round(dataPointAt11Km[2].x, 1)) + " [m/s]\nV_y:   " + str(round(dataPointAt11Km[2].y, 1)) + " [m/s]\nV_t:   " + str(round(dataPointAt11Km[2].length(), 1))  + " [m/s]\ny_p:   " + str(round(dataPointAt11Km[5], 2)) + " [deg]\n")
 print("> At 0 [m]:\n\n"      + "V_x:   " + str(round(dataPointAt0Km[2].x, 1))  + " [m/s]\nV_y:   " + str(round(dataPointAt0Km[2].y, 1))  + " [m/s]\nV_t:   " + str(round(dataPointAt0Km[2].length(), 1))   + " [m/s]\ny_p:   " + str(round(dataPointAt0Km[5], 2)) + " [deg]\n")
 
+dataPointAt186kts = travelledPath.getdatapointatspeed(186*0.514444)
+
+print("> At 186 [kts] the altitude is: " + str(round(dataPointAt186kts[3], 1)) + " [m]")
+
 # ------------------------------------------------------
 # Display plot of results
 # ------------------------------------------------------

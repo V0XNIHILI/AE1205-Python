@@ -67,6 +67,18 @@ class PathTravelled:
 
         return dataPointAtAltitude
 
+    def getdatapointatspeed (self, speed):
+        fSmallestSquaredDistanceToSpeed = math.pow((self.arrDataPoints[0][2].length() - speed), 2)
+        dataPointAtSpeed = None
+
+        for dataPoint in self.arrDataPoints:
+            fSquaredSpeedDifference = math.pow((dataPoint[2].length() - speed), 2)
+            if fSquaredSpeedDifference < fSmallestSquaredDistanceToSpeed:
+                fSmallestSquaredDistanceToSpeed = fSquaredSpeedDifference
+                dataPointAtSpeed = dataPoint
+
+        return dataPointAtSpeed
+
     def getaltitudesinkft (self):
         arrAltitudesInKFt = []
 
@@ -87,7 +99,7 @@ class PathTravelled:
         arrGForces = []
 
         for dataPoint in self.arrDataPoints:
-            arrGForces.append(abs(dataPoint[2].y)/9.980665)
+            arrGForces.append(abs(dataPoint[1].y)/9.980665)
 
         return arrGForces
 

@@ -42,6 +42,6 @@ y_p:   -90.0 [deg]
 > The maximum G-force is: 21.02 [-]
 ```
 
-## Expected output form the plots
+## Expected output from the plots
 
-![Plots](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/3/photos/plots.png))
+![Plots](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/3/photos/plots.png)

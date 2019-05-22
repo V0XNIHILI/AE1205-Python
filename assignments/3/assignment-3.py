@@ -54,7 +54,7 @@ mainChute = Parachute(225*0.3048, 28*0.3048, 5*60+31, 1.75, 154, 10*1000*0.3048)
 
 # Create, run and save the simulation
 currentSimulation = ReEntry(currentSpacecraft, currentPlanet, fInitialAltitude, fInitialVelocity, fFlightPathDeg, drogueChute, mainChute)
-arrDatapointsFromSimulation = currentSimulation.simulate(0.01, True)
+arrDatapointsFromSimulation = currentSimulation.simulate(0.1, True)
 travelledPath = PathTravelled(arrDatapointsFromSimulation)
 
 # ------------------------------------------------------

@@ -8,7 +8,7 @@ from pendulum import Pendulum
 iFps = 500
 fScale = 200 # fScale number of pixels = 1 m, 15 pendula: 2000
 fGravitationalAcceleration = 9.80665
-fPendulumRadius = 0.9 # 15 pendula -> 0.04
+fPendulumRadius = 0.7 # 15 pendula -> 0.04
 fRopeThickness = 0.02 # 15 pendula -> 0.001
 ropeColor = (112, 112, 112)
 fInitialAngle = 45
@@ -31,7 +31,7 @@ pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN])
 # Setup game window
 gameSize = (iWidthOfGame, iHeightOfGame)
 
-iHalfScreenWidth = int (iWidthOfGame / 2)
+iHalfScreenWidth = int(iWidthOfGame / 2)
 
 screen = pygame.display.set_mode(gameSize)
 screen.set_alpha(None)  # Disable transparancy for faster run time
@@ -42,13 +42,12 @@ pygame.mixer.music.load("music.mp3")
 pygame.mixer.music.play(-1)
 
 # Import the pendulum
-pendulumImage = pygame.image.load("miley.png")
+pendulumImage = pygame.image.load("miley-small.png")
 
 pendula = []
 
 for currentSwingsPerMinute in range(iMinAmountOfSwingsPerMinute, iMaxAmountOfSwingsPerMinute + 1):
     currentRopeLength = math.pow(((60/currentSwingsPerMinute) / (2 * math.pi)), 2) * fGravitationalAcceleration
-    print(currentRopeLength)
     singlePendulum = Pendulum(fPendulumRadius, currentRopeLength, ropeColor, fRopeThickness, fScale, fGravitationalAcceleration, fInitialAngle, screen, pendulumImage)
 
     pendula.append(singlePendulum)

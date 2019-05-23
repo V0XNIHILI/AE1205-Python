@@ -8,7 +8,7 @@ The link to Brightspace for this course can be found [here](https://brightspace.
 
 ## File/folder structure
 
-The assignments folder contains all of the assignments from class. In every assignment folder, there is one file called `assignment-x.py` where `x` is the assignment number. The other files in there are used in the `assignment-x.py` file. Every folder also has a file called `README.md` where you can see what the output should look like.
+The `assignments` folder contains all of the assignments from class. In every assignment folder, there is a folder called `program`, which contains a file called `program.py`. This file is the solution to the assignment. The other files in the `program` folder are there to support this main file. Every assignment folder also has a file called `README.md` where you can see what the output should look like.
 
 ## How I write code
 
@@ -19,6 +19,7 @@ Since Python does not require you to explicitly define the type of the variable 
 * Strings ("Python"), example `sLoremIpsum`
 * Booleans (true/false), example: `bIsReady`
 * Arrays ([1],[2]), example `arrNumbers`
+* Objects (color), example `currentColor`
 
 ***
 

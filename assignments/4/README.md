@@ -2,7 +2,7 @@
 
 ## Photos of the assignment paper
 
-| ![Page 1](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/4/photos/assignment-4-1.jpeg) | ![Page 2](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/4/photos/assignment-4-2.jpeg) |
+| ![Page 1](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/4/photos/assignment-4-1.jpg) | ![Page 2](https://github.com/V0XNIHILI/AE1205-Python/blob/master/assignments/4/photos/assignment-4-2.jpg) |
 |----:|------:|
 
 ## Expected output from the program

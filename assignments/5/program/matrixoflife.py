@@ -19,6 +19,9 @@ class MatrixOfLife:
 
     def evolve (self):
 
+        # Create a matrix with 0's padded around the original matrix, done by creating
+        # an empty zeroes matrix 2 units wider and taller than the original matrix and 
+        # placing the original matrix in the middle of this zero matrix
         paddedMatrix = numpy.zeros(shape=(self.matrixWidth + 2, self.matrixHeight + 2))
         paddedMatrix[1:1+self.matrix.shape[0], 1:1+self.matrix.shape[1]] = self.matrix
 
@@ -53,6 +56,36 @@ class MatrixOfLife:
 
                     elif decisionValue >= 4:
                         self.matrix[iCurrentWidth, iCurrentHeight] = 0
+
+    def loadlife(self, lifLines):
+        
+        startX = 0
+        startY = 0
+
+        retrieveLifePoints = False
+
+        verticalIndex = 0
+
+        for lifLine in lifLines:
+            if retrieveLifePoints == True:
+                horizontalIndex = 0
+
+                for cellState in lifLine.strip():
+                    if cellState == "*":
+                        self.matrix[startX + horizontalIndex, startY + verticalIndex] = 1
+
+                    horizontalIndex += 1
+
+                verticalIndex += 1
+                    
+            elif lifLine.startswith("#P"):
+                coordinatesString = lifLine.split(" ")
+
+                startX = int(coordinatesString[1])
+                startY = int(coordinatesString[2])
+
+                retrieveLifePoints = True
+
 
     def tostring (self):
 

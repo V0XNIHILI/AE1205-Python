@@ -6,9 +6,6 @@ import pygame
 import math
 import colorsys
 
-import tkinter as tk
-from tkinter import filedialog
-
 from matrixoflife import MatrixOfLife
 from input import Input
 
@@ -31,7 +28,7 @@ iEvolutionsPerSecond = 9
 iTransparancy = 64 # between 0 and 255, lower means cells stay visible longer
 fRainbowSpeed = 0.5
 enableRainbow = True
-iWidthOfGame = 1000 
+iWidthOfGame = 1000
 iHeightOfGame = 1000
 iFieldWidth = 100
 iFieldHeight = 100
@@ -45,17 +42,10 @@ currentLife = None
 loadFile = Input.IsTrue(Input.Ask("Do you want to load a custom .LIFE file? (y/n)", ["y", "n"]))
 
 if loadFile == True:
-    #root = tk.Tk()
-    #root.withdraw()
-
-    #filePath = filedialog.askopenfilename()
-
-    questionsFile = open("test.LIF", "r")
+    lifFile = open("test.LIF", "r")
 
     currentLife = MatrixOfLife(iFieldWidth, iFieldHeight, False)
-    currentLife.loadlife(questionsFile.readlines())
-
-    currentLife.tostring()
+    currentLife.loadlife(lifFile.readlines())
 
 else:
     currentLife = MatrixOfLife(iFieldWidth, iFieldHeight, True)

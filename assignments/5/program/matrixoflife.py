@@ -58,7 +58,10 @@ class MatrixOfLife:
                         self.matrix[iCurrentWidth, iCurrentHeight] = 0
 
     def loadlife(self, lifLines):
-        
+
+        matrixHorizontalCenter = int(self.matrixWidth/2)
+        matrixVerticalCenter = int(self.matrixHeight/2)
+
         startX = 0
         startY = 0
 
@@ -66,26 +69,26 @@ class MatrixOfLife:
 
         verticalIndex = 0
 
-        for lifLine in lifLines:
-            if retrieveLifePoints == True:
-                horizontalIndex = 0
-
-                for cellState in lifLine.strip():
-                    if cellState == "*":
-                        self.matrix[startX + horizontalIndex, startY + verticalIndex] = 1
-
-                    horizontalIndex += 1
-
-                verticalIndex += 1
-                    
-            elif lifLine.startswith("#P"):
+        for lifLine in lifLines:           
+            if lifLine.startswith("#P"):
+                # Reset vertical index to zero
+                verticalIndex = 0
                 coordinatesString = lifLine.split(" ")
 
-                startX = int(coordinatesString[1])
-                startY = int(coordinatesString[2])
+                startX = matrixHorizontalCenter + int(coordinatesString[1])
+                startY = matrixVerticalCenter + int(coordinatesString[2])
 
-                retrieveLifePoints = True
+                continue
 
+            horizontalIndex = 0
+
+            for cellState in lifLine.strip():
+                if cellState == "*":
+                    self.matrix[startX + horizontalIndex, startY + verticalIndex] = 1
+
+                horizontalIndex += 1
+
+            verticalIndex += 1
 
     def tostring (self):
 
